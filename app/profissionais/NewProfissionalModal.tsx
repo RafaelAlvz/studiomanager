@@ -5,6 +5,8 @@ import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import { X, Plus, UserPlus } from 'lucide-react';
 import { createProfissionalAction } from '@/lib/actions/profissional-actions';
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
+import '@/app/phone-input.css';
 
 export default function NewProfissionalModal() {
     const router = useRouter();
@@ -103,13 +105,17 @@ export default function NewProfissionalModal() {
 
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">Telefone / WhatsApp</label>
-                                <input
-                                    type="tel"
+                                <PhoneInput
+                                    international
+                                    defaultCountry="BR"
+                                    limitMaxLength
                                     value={telefone}
-                                    onChange={(e) => setTelefone(e.target.value)}
-                                    placeholder="Ex: (11) 99999-9999"
-                                    className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all text-gray-700"
+                                    onChange={(value) => setTelefone(value || '')}
+                                    className={`w-full px-4 py-2.5 bg-white border ${telefone && !isValidPhoneNumber(telefone) ? 'border-red-500 focus-within:ring-red-500/20 focus-within:border-red-500' : 'border-gray-200 focus-within:ring-emerald-500 focus-within:border-emerald-500'} rounded-xl focus-within:ring-2 outline-none transition-all text-gray-700`}
                                 />
+                                {telefone && !isValidPhoneNumber(telefone) && (
+                                    <p className="text-xs text-red-500 mt-1 font-medium">Este número de telefone é inválido.</p>
+                                )}
                             </div>
 
                             <div>
@@ -140,7 +146,7 @@ export default function NewProfissionalModal() {
                             </button>
                             <button
                                 onClick={handleCreate}
-                                disabled={isPending}
+                                disabled={isPending || (!!telefone && !isValidPhoneNumber(telefone))}
                                 className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium rounded-xl flex items-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
                             >
                                 {isPending ? (

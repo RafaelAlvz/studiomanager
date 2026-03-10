@@ -7,6 +7,7 @@ import EditBasicProfissionalModal from './EditBasicProfissionalModal';
 import DeleteProfissionalButton from './DeleteProfissionalButton';
 import ProfissionalFooterID from './ProfissionalFooterID';
 import { Clock, CalendarDays, User } from 'lucide-react';
+import { getConfiguracaoAction } from '@/lib/actions/configuracao-actions';
 
 export const revalidate = 0;
 
@@ -15,13 +16,15 @@ export default async function ProfissionaisPage() {
     orderBy: { nome: 'asc' }
   });
 
+  const config = await getConfiguracaoAction();
+
   const diasSemanaMap: Record<string, string> = {
     '0': 'Dom', '1': 'Seg', '2': 'Ter', '3': 'Qua', '4': 'Qui', '5': 'Sex', '6': 'Sáb'
   };
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans text-slate-900">
-      <Sidebar />
+      <Sidebar initialNome={config.nome_negocio} initialLogo={config.logo_url} />
 
       {/* Main Content */}
       <main className="flex-1 p-4 md:p-8 md:ml-64 w-full max-w-7xl mx-auto">

@@ -3,24 +3,26 @@
 import React, { useState } from 'react';
 import { Plus, Search, Edit2, Trash2, Phone, Calendar as CalendarIcon } from 'lucide-react';
 import { createCliente, updateCliente, deleteCliente } from './actions';
+import PhoneInput, { formatPhoneNumberIntl, isValidPhoneNumber } from 'react-phone-number-input';
+import '@/app/phone-input.css';
 
 export default function ClientesManager({ initialClientes }: { initialClientes: any[] }) {
   const [clientes, setClientes] = useState(initialClientes);
   const [searchTerm, setSearchTerm] = useState("");
-  
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
+
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     nome: '',
     telefone_whatsapp: '',
   });
 
-  const filteredClientes = clientes.filter(c => 
-    c.nome.toLowerCase().includes(searchTerm.toLowerCase()) || 
+  const filteredClientes = clientes.filter(c =>
+    c.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
     c.telefone_whatsapp.includes(searchTerm)
   );
 
@@ -42,12 +44,19 @@ export default function ClientesManager({ initialClientes }: { initialClientes: 
   };
 
   const formatPhone = (phone: string) => {
-    // Basic structural formatter: 11999999999 -> (11) 99999-9999
     if (!phone) return phone;
+    // Attempt to use the library's intl formatting first
+    try {
+      if (phone.startsWith('+')) {
+        return formatPhoneNumberIntl(phone);
+      }
+    } catch (e) { }
+
+    // Fallback basic formatter for old data
     const cleaned = ('' + phone).replace(/\D/g, '');
-    const match = cleaned.match(/^(\d{2})(\d{4,5})(\d{4})$/);
-    if (match) {
-      return `(${match[1]}) ${match[2]}-${match[3]}`;
+    if (cleaned.length === 11) {
+      const match = cleaned.match(/^(\d{2})(\d{5})(\d{4})$/);
+      if (match) return `(${match[1]}) ${match[2]}-${match[3]}`;
     }
     return phone;
   }
@@ -56,7 +65,7 @@ export default function ClientesManager({ initialClientes }: { initialClientes: 
     e.preventDefault();
     setIsSaving(true);
     setError(null);
-    
+
     try {
       if (editingId) {
         await updateCliente(editingId, formData);
@@ -94,8 +103,8 @@ export default function ClientesManager({ initialClientes }: { initialClientes: 
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <Search size={18} className="text-slate-400" />
           </div>
-          <input 
-            type="text" 
+          <input
+            type="text"
             placeholder="Buscar por nome ou telefone..."
             className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all shadow-sm"
             value={searchTerm}
@@ -103,7 +112,7 @@ export default function ClientesManager({ initialClientes }: { initialClientes: 
           />
         </div>
 
-        <button 
+        <button
           onClick={openNew}
           className="flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-xl text-sm font-medium transition-colors shadow-sm whitespace-nowrap"
         >
@@ -143,7 +152,7 @@ export default function ClientesManager({ initialClientes }: { initialClientes: 
                   <td className="px-6 py-4">
                     <div className="flex flex-col">
                       <span className="text-slate-600 flex items-center gap-1.5 object-contain">
-                        <CalendarIcon size={14} className="text-blue-500" /> 
+                        <CalendarIcon size={14} className="text-blue-500" />
                         {c._count?.agendamentos || 0} visitas
                       </span>
                       {c.total_faltas > 0 && (
@@ -153,11 +162,11 @@ export default function ClientesManager({ initialClientes }: { initialClientes: 
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex justify-end gap-2">
-                       <button onClick={() => openEdit(c)} className="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors" title="Editar">
+                      <button onClick={() => openEdit(c)} className="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors" title="Editar">
                         <Edit2 size={16} />
                       </button>
-                      <button 
-                        onClick={() => handleDelete(c.id)} 
+                      <button
+                        onClick={() => handleDelete(c.id)}
                         disabled={isDeleting === c.id}
                         className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors" title="Excluir"
                       >
@@ -195,41 +204,45 @@ export default function ClientesManager({ initialClientes }: { initialClientes: 
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">Nome Completo</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     required
                     placeholder="Ex: João Silva"
                     className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
                     value={formData.nome}
-                    onChange={e => setFormData({...formData, nome: e.target.value})}
+                    onChange={e => setFormData({ ...formData, nome: e.target.value })}
                   />
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">Telefone (WhatsApp)</label>
-                  <input 
-                    type="tel" 
-                    required
-                    placeholder="11999999999"
-                    className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
+                  <PhoneInput
+                    international
+                    defaultCountry="BR"
+                    limitMaxLength
                     value={formData.telefone_whatsapp}
-                    onChange={e => setFormData({...formData, telefone_whatsapp: e.target.value.replace(/\D/g, '')})}
+                    onChange={(value) => setFormData({ ...formData, telefone_whatsapp: value || '' })}
+                    className={`w-full bg-slate-50 border ${formData.telefone_whatsapp && !isValidPhoneNumber(formData.telefone_whatsapp) ? 'border-red-500 focus-within:ring-red-500/20 focus-within:border-red-500' : 'border-slate-200 focus-within:ring-emerald-500/20 focus-within:border-emerald-500'} text-slate-900 rounded-xl px-4 py-2.5 outline-none focus-within:ring-2 transition-all`}
                   />
-                  <p className="text-xs text-slate-400 mt-1">Apenas números. Usado para identificar o cliente no bot.</p>
+                  {formData.telefone_whatsapp && !isValidPhoneNumber(formData.telefone_whatsapp) ? (
+                    <p className="text-xs text-red-500 mt-1 font-medium">O número de telefone fornecido é inválido.</p>
+                  ) : (
+                    <p className="text-xs text-slate-400 mt-1">Usado também para identificar o cliente e enviar mensagens.</p>
+                  )}
                 </div>
               </div>
 
               <div className="mt-8 flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   onClick={() => setIsModalOpen(false)}
                   className="px-5 py-2.5 text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-xl transition-colors"
                 >
                   Cancelar
                 </button>
-                <button 
-                  type="submit" 
-                  disabled={isSaving}
+                <button
+                  type="submit"
+                  disabled={isSaving || !formData.telefone_whatsapp || !isValidPhoneNumber(formData.telefone_whatsapp)}
                   className="px-5 py-2.5 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl transition-colors shadow-sm disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {isSaving ? 'Salvando...' : 'Salvar Cliente'}

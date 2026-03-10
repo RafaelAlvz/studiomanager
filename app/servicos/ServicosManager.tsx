@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Plus, Edit2, Trash2, Clock, DollarSign, Wand2 } from 'lucide-react';
 import { createServico, updateServico, deleteServico } from './actions';
 import ProfissionalFooterID from '../profissionais/ProfissionalFooterID';
+import { formatCurrencyInput, parseCurrencyInput } from '@/lib/currency';
 
 export default function ServicosManager({ initialServicos }: { initialServicos: any[] }) {
   const [servicos, setServicos] = useState(initialServicos);
@@ -16,7 +17,7 @@ export default function ServicosManager({ initialServicos }: { initialServicos: 
     nome_servico: '',
     duracao: 30,
     tempoPreparacao: 0,
-    preco: 0,
+    preco: '',
   });
 
   const formatCurrency = (value: number) => {
@@ -25,7 +26,7 @@ export default function ServicosManager({ initialServicos }: { initialServicos: 
 
   const openNew = () => {
     setEditingId(null);
-    setFormData({ nome_servico: '', duracao: 30, tempoPreparacao: 0, preco: 0 });
+    setFormData({ nome_servico: '', duracao: 30, tempoPreparacao: 0, preco: '' });
     setIsModalOpen(true);
   };
 
@@ -35,7 +36,7 @@ export default function ServicosManager({ initialServicos }: { initialServicos: 
       nome_servico: s.nome_servico,
       duracao: s.duracao,
       tempoPreparacao: s.tempoPreparacao,
-      preco: s.preco,
+      preco: formatCurrencyInput(s.preco),
     });
     setIsModalOpen(true);
   };
@@ -48,7 +49,7 @@ export default function ServicosManager({ initialServicos }: { initialServicos: 
         nome_servico: formData.nome_servico,
         duracao: Number(formData.duracao),
         tempoPreparacao: Number(formData.tempoPreparacao),
-        preco: Number(formData.preco),
+        preco: parseCurrencyInput(formData.preco),
       };
 
       if (editingId) {
@@ -172,16 +173,14 @@ export default function ServicosManager({ initialServicos }: { initialServicos: 
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Preço (R$)</label>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Preço</label>
                 <input
-                  type="number"
+                  type="text"
                   required
-                  min="0"
-                  step="0.01"
-                  placeholder="45.00"
-                  className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
-                  value={formData.preco || ''}
-                  onChange={e => setFormData({ ...formData, preco: Number(e.target.value) })}
+                  placeholder="R$ 0,00"
+                  className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all font-medium"
+                  value={formData.preco}
+                  onChange={e => setFormData({ ...formData, preco: formatCurrencyInput(e.target.value) })}
                 />
               </div>
 

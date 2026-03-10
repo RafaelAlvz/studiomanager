@@ -4,6 +4,7 @@ import { LayoutDashboard, Scissors, Menu } from 'lucide-react';
 import Link from 'next/link';
 import Sidebar from '@/components/dashboard/Sidebar';
 import ServicosManager from './ServicosManager';
+import { getConfiguracaoAction } from '@/lib/actions/configuracao-actions';
 
 export default async function ServicosPage() {
   const servicos = await prisma.servico.findMany({
@@ -11,9 +12,11 @@ export default async function ServicosPage() {
     orderBy: { nome_servico: 'asc' }
   });
 
+  const config = await getConfiguracaoAction();
+
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans text-slate-900">
-      <Sidebar />
+      <Sidebar initialNome={config.nome_negocio} initialLogo={config.logo_url} />
 
       {/* Main Content */}
       <main className="flex-1 p-4 md:p-8 md:ml-64 w-full max-w-7xl mx-auto">

@@ -1,9 +1,9 @@
 {
   "pages": {
-    "/page": [
+    "/servicos/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+      "static/chunks/app/servicos/page.js"
     ],
     "/layout": [
       "static/chunks/webpack.js",
@@ -11,25 +11,23 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/profissionais/page": [
+    "/agenda/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/profissionais/page.js"
+      "static/css/app/agenda/page.css",
+      "static/chunks/app/agenda/page.js"
     ],
-    "/servicos/page": [
+    "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/servicos/page.js"
+      "static/css/app/page.css",
+      "static/chunks/app/page.js"
     ],
     "/clientes/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
+      "static/css/app/clientes/page.css",
       "static/chunks/app/clientes/page.js"
-    ],
-    "/configuracoes/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/configuracoes/page.js"
     ]
   }
 }

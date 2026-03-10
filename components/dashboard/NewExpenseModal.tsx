@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { X, Minus, Receipt } from 'lucide-react';
 import { createExpense } from '@/app/actions/finance';
 import toast from 'react-hot-toast';
+import { formatCurrencyInput, parseCurrencyInput } from '@/lib/currency';
 
 export default function NewExpenseModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +30,7 @@ export default function NewExpenseModal() {
 
       await createExpense({
         descricao,
-        valor: Number(valor),
+        valor: parseCurrencyInput(valor),
         data_transacao: dataFormatada
       });
 
@@ -101,16 +102,14 @@ export default function NewExpenseModal() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">Valor (R$)</label>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Valor</label>
                     <input
-                      type="number"
+                      type="text"
                       required
-                      min="0.01"
-                      step="0.01"
-                      placeholder="0.00"
-                      className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 transition-all"
+                      placeholder="R$ 0,00"
+                      className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 transition-all font-medium"
                       value={valor}
-                      onChange={e => setValor(e.target.value)}
+                      onChange={e => setValor(formatCurrencyInput(e.target.value))}
                     />
                   </div>
                   <div>

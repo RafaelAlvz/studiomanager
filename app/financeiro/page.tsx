@@ -5,13 +5,17 @@ import NewExpenseModal from '@/components/dashboard/NewExpenseModal';
 import { TrendingUp, TrendingDown, Wallet, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { getConfiguracaoAction } from '@/lib/actions/configuracao-actions';
 
 export const dynamic = 'force-dynamic';
 
 export default async function FinanceiroPage() {
-    const transacoes = await prisma.transacao.findMany({
-        orderBy: { data: 'desc' }
-    });
+    const [transacoes, config] = await Promise.all([
+        prisma.transacao.findMany({
+            orderBy: { data: 'desc' }
+        }),
+        getConfiguracaoAction()
+    ]);
 
     const totalEntradas = transacoes.filter((t: any) => t.tipo === 'ENTRADA').reduce((acc: number, curr: any) => acc + curr.valor, 0);
     const totalSaidas = transacoes.filter((t: any) => t.tipo === 'SAIDA').reduce((acc: number, curr: any) => acc + curr.valor, 0);
@@ -21,7 +25,7 @@ export default async function FinanceiroPage() {
 
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col font-sans text-slate-900">
-            <Sidebar />
+            <Sidebar initialNome={config.nome_negocio} initialLogo={config.logo_url} />
             <main className="flex-1 p-4 md:p-8 md:ml-64 w-full max-w-7xl mx-auto">
                 <header className="mb-8 mt-2 md:mt-0 flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>

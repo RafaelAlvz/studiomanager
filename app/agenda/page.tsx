@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Sidebar from '@/components/dashboard/Sidebar';
 import AgendaManager from './AgendaManager';
 import NewAppointmentModal from '@/components/dashboard/NewAppointmentModal';
+import { getConfiguracaoAction } from '@/lib/actions/configuracao-actions';
 
 export default async function AgendaPage() {
   // Fetch all professionals for the filter
@@ -18,10 +19,11 @@ export default async function AgendaPage() {
   dataLimite.setDate(dataLimite.getDate() - 30); // fetch from 30 days ago to future
 
   // Fetch options for the NewAppointmentModal
-  const [clientesRaw, profissionaisRaw, servicosRaw] = await Promise.all([
+  const [clientesRaw, profissionaisRaw, servicosRaw, config] = await Promise.all([
     prisma.cliente.findMany({ select: { id: true, nome: true }, orderBy: { nome: 'asc' } }),
     prisma.profissional.findMany({ select: { id: true, nome: true }, orderBy: { nome: 'asc' } }),
-    prisma.servico.findMany({ select: { id: true, nome_servico: true, duracao: true, tempoPreparacao: true }, orderBy: { nome_servico: 'asc' } })
+    prisma.servico.findMany({ select: { id: true, nome_servico: true, duracao: true, tempoPreparacao: true }, orderBy: { nome_servico: 'asc' } }),
+    getConfiguracaoAction()
   ]);
 
   const clientesOptions = clientesRaw.map((c: any) => ({ id: c.id, name: c.nome }));
@@ -46,7 +48,7 @@ export default async function AgendaPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans text-slate-900">
-      <Sidebar />
+      <Sidebar initialNome={config.nome_negocio} initialLogo={config.logo_url} />
 
       {/* Main Content */}
       <main className="flex-1 p-4 md:p-8 md:ml-64 w-full max-w-7xl mx-auto">

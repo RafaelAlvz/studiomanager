@@ -39,7 +39,7 @@ export async function saveConfiguracaoAction(data: { nome_negocio: string; logo_
             });
         }
 
-        revalidatePath('/');
+        revalidatePath('/', 'layout');
         return { success: true };
     } catch (error: any) {
         console.error("Erro ao salvar configuração:", error);

@@ -3,6 +3,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { X, Plus, CalendarClock, Search, UserPlus } from 'lucide-react';
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
+import '@/app/phone-input.css';
 
 interface SelectOption {
   id: string;
@@ -182,80 +184,102 @@ export default function NewAppointmentModal({ clientes, profissionais, servicos 
               )}
 
               <div className="space-y-5">
-                {/* Cliente Combobox */}
-                <div className="relative" ref={dropdownRef}>
-                  <label className="block text-sm font-semibold text-slate-700 mb-1.5">Cliente</label>
+                {/* Cliente Combobox (mutuamente exclusivo com a criação de cliente) */}
+                {!isCreatingClient && (
+                  <div className="relative" ref={dropdownRef}>
+                    <label className="block text-sm font-semibold text-slate-700 mb-1.5">Cliente</label>
 
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Search size={16} className="text-slate-400" />
-                    </div>
-                    <input
-                      type="text"
-                      placeholder="Buscar cliente por nome..."
-                      className="w-full bg-white border border-slate-200 text-slate-900 rounded-xl pl-10 pr-4 py-2.5 outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
-                      value={searchCliente}
-                      onChange={(e) => {
-                        setSearchCliente(e.target.value);
-                        setIsDropdownOpen(true);
-                        setIsCreatingClient(false);
-                      }}
-                      onFocus={() => setIsDropdownOpen(true)}
-                    />
-                  </div>
-
-                  {/* Dropdown de Clientes */}
-                  {isDropdownOpen && (
-                    <div className="absolute z-10 w-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg max-h-60 overflow-y-auto">
-                      {filteredClientes.length > 0 ? (
-                        <ul className="py-1">
-                          {filteredClientes.map((c) => (
-                            <li
-                              key={c.id}
-                              onClick={() => handleSelectClient(c)}
-                              className="px-4 py-2.5 text-sm hover:bg-slate-50 cursor-pointer flex items-center justify-between"
-                            >
-                              <span className="font-medium text-slate-700">{c.name}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <div className="p-4 text-center text-sm text-slate-500">
-                          Nenhum cliente encontrado com "{searchCliente}"
-                        </div>
-                      )}
-
-                      {/* Opção de Criar Novo no final do dropdown */}
-                      <div className="border-t border-slate-100 p-2">
-                        <button
-                          type="button"
-                          onClick={startCreatingClient}
-                          className="w-full flex items-center gap-2 justify-center px-4 py-2 text-sm font-medium text-emerald-600 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-colors"
-                        >
-                          <UserPlus size={16} />
-                          + Cadastrar "{searchCliente || 'Novo Cliente'}"
-                        </button>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <Search size={16} className="text-slate-400" />
                       </div>
+                      <input
+                        type="text"
+                        placeholder="Buscar cliente por nome..."
+                        className="w-full bg-white border border-slate-200 text-slate-900 rounded-xl pl-10 pr-4 py-2.5 outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
+                        value={searchCliente}
+                        onChange={(e) => {
+                          setSearchCliente(e.target.value);
+                          setIsDropdownOpen(true);
+                        }}
+                        onFocus={() => setIsDropdownOpen(true)}
+                      />
                     </div>
-                  )}
-                </div>
+
+                    {/* Dropdown de Clientes */}
+                    {isDropdownOpen && (
+                      <div className="absolute z-10 w-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg max-h-60 overflow-y-auto">
+                        {filteredClientes.length > 0 ? (
+                          <ul className="py-1">
+                            {filteredClientes.map((c) => (
+                              <li
+                                key={c.id}
+                                onClick={() => handleSelectClient(c)}
+                                className="px-4 py-2.5 text-sm hover:bg-slate-50 cursor-pointer flex items-center justify-between"
+                              >
+                                <span className="font-medium text-slate-700">{c.name}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <div className="p-4 text-center text-sm text-slate-500">
+                            Nenhum cliente encontrado com "{searchCliente}"
+                          </div>
+                        )}
+
+                        {/* Opção de Criar Novo no final do dropdown */}
+                        <div className="border-t border-slate-100 p-2">
+                          <button
+                            type="button"
+                            onClick={startCreatingClient}
+                            className="w-full flex items-center gap-2 justify-center px-4 py-2 text-sm font-medium text-emerald-600 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-colors"
+                          >
+                            <UserPlus size={16} />
+                            + Cadastrar "{searchCliente || 'Novo Cliente'}"
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
 
                 {/* Campos Extras (Criação de Cliente Inline) */}
                 {isCreatingClient && (
-                  <div className="p-4 bg-emerald-50/50 border border-emerald-100 rounded-xl space-y-3 animate-in fade-in zoom-in-95 duration-200">
+                  <div className="p-4 bg-emerald-50/50 border border-emerald-100 rounded-xl space-y-3 animate-in fade-in zoom-in-95 duration-200 relative">
+                    <button
+                      type="button"
+                      onClick={() => setIsCreatingClient(false)}
+                      className="absolute top-4 right-4 text-emerald-600 hover:text-emerald-800 p-1 hover:bg-emerald-100/50 rounded-lg transition-colors"
+                      title="Voltar para a busca"
+                    >
+                      <X size={18} />
+                    </button>
                     <div className="flex items-center gap-2 text-sm font-semibold text-emerald-800 mb-1">
                       <UserPlus size={16} />
-                      Novo Cliente Sendo Cadastrado
+                      Cadastrar Novo Cliente
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-slate-600 mb-1">Telefone / WhatsApp</label>
+                      <label className="block text-xs font-medium text-slate-600 mb-1">Nome Completo</label>
                       <input
-                        type="tel"
-                        placeholder="Ex: (11) 99999-9999"
-                        className="w-full bg-white border border-emerald-200 text-slate-900 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all text-sm"
-                        value={newClientPhone}
-                        onChange={e => setNewClientPhone(e.target.value)}
+                        type="text"
+                        placeholder="Nome do novo cliente"
+                        className="w-full bg-white border border-emerald-200 text-slate-900 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all text-sm mb-3"
+                        value={searchCliente}
+                        onChange={e => setSearchCliente(e.target.value)}
+                        autoFocus
                       />
+                      <label className="block text-xs font-medium text-slate-600 mb-1">Telefone / WhatsApp (Opcional)</label>
+                      <PhoneInput
+                        international
+                        defaultCountry="BR"
+                        limitMaxLength
+                        value={newClientPhone}
+                        onChange={(value) => setNewClientPhone(value || '')}
+                        className={`w-full bg-white border ${newClientPhone && !isValidPhoneNumber(newClientPhone) ? 'border-red-500 focus-within:ring-red-500/20 focus-within:border-red-500' : 'border-emerald-200 focus-within:ring-emerald-500/20 focus-within:border-emerald-500'} text-slate-900 rounded-lg px-3 py-2 outline-none focus-within:ring-2 transition-all text-sm`}
+                      />
+                      {newClientPhone && !isValidPhoneNumber(newClientPhone) && (
+                        <p className="text-xs text-red-500 mt-1 font-medium">Número de telefone inválido.</p>
+                      )}
                     </div>
                   </div>
                 )}
@@ -323,7 +347,7 @@ export default function NewAppointmentModal({ clientes, profissionais, servicos 
                 </button>
                 <button
                   type="submit"
-                  disabled={isLoading}
+                  disabled={isLoading || (isCreatingClient && !!newClientPhone && !isValidPhoneNumber(newClientPhone))}
                   className="px-6 py-2.5 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl transition-colors shadow-sm disabled:opacity-70 disabled:cursor-not-allowed flex items-center gap-2"
                 >
                   {isLoading ? 'Checando & Salvando...' : 'Agendar'}

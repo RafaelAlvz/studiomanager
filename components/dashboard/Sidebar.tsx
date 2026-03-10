@@ -17,14 +17,32 @@ import {
 } from 'lucide-react';
 import { getConfiguracaoAction } from '@/lib/actions/configuracao-actions';
 
-export default function Sidebar() {
+interface SidebarProps {
+    initialNome?: string;
+    initialLogo?: string | null;
+}
+
+export default function Sidebar({ initialNome = 'StudioManager', initialLogo = null }: SidebarProps) {
     const pathname = usePathname();
     const { data: session } = useSession();
-    const [nomeNegocio, setNomeNegocio] = React.useState('StudioManager');
+    const [nomeNegocio, setNomeNegocio] = React.useState(initialNome);
+    const [logoUrl, setLogoUrl] = React.useState<string | null>(initialLogo);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
+    const loadConfig = () => {
+        getConfiguracaoAction().then((res: any) => {
+            setNomeNegocio(res.nome_negocio || 'StudioManager');
+            setLogoUrl(res.logo_url || null);
+        });
+    };
+
     React.useEffect(() => {
-        getConfiguracaoAction().then(res => setNomeNegocio(res.nome_negocio));
+        const handleConfigUpdate = () => {
+            loadConfig();
+        };
+
+        window.addEventListener('configUpdated', handleConfigUpdate);
+        return () => window.removeEventListener('configUpdated', handleConfigUpdate);
     }, []);
 
     const getLinkClass = (href: string) => {
@@ -41,8 +59,12 @@ export default function Sidebar() {
             {/* Sidebar Mobile Navigation */}
             <div className="md:hidden bg-white p-4 flex justify-between items-center shadow-sm border-b border-slate-100 sticky top-0 z-20 w-full">
                 <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center">
-                        <span className="text-white font-bold text-lg">{nomeNegocio.charAt(0).toUpperCase()}</span>
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0 ${logoUrl ? 'bg-transparent' : 'bg-emerald-600'}`}>
+                        {logoUrl ? (
+                            <img src={logoUrl} alt="Logo" className="w-full h-full object-contain" />
+                        ) : (
+                            <span className="text-white font-bold text-lg">{nomeNegocio.charAt(0).toUpperCase()}</span>
+                        )}
                     </div>
                     <h1 className="font-semibold text-lg text-slate-800">{nomeNegocio}</h1>
                 </div>
@@ -66,8 +88,12 @@ export default function Sidebar() {
             <aside className={`fixed flex w-64 flex-col bg-white border-r border-slate-200 shadow-sm h-full z-40 top-0 left-0 transition-transform duration-300 md:translate-x-0 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
                 <div className="p-6 flex items-center justify-between md:justify-start gap-3">
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center shadow-md shadow-emerald-200">
-                            <span className="text-white font-bold text-xl">{nomeNegocio.charAt(0).toUpperCase()}</span>
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden flex-shrink-0 ${logoUrl ? 'bg-transparent' : 'bg-emerald-600 shadow-md shadow-emerald-200'}`}>
+                            {logoUrl ? (
+                                <img src={logoUrl} alt="Logo" className="w-full h-full object-contain" />
+                            ) : (
+                                <span className="text-white font-bold text-xl">{nomeNegocio.charAt(0).toUpperCase()}</span>
+                            )}
                         </div>
                         <h1 className="font-bold text-xl tracking-tight text-slate-800 truncate">{nomeNegocio}</h1>
                     </div>

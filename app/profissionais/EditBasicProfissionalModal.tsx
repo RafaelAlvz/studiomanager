@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import { X, Pencil, Save } from 'lucide-react';
 import { updateProfissionalBaseAction } from '@/lib/actions/profissional-actions';
 import toast from 'react-hot-toast';
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
+import '@/app/phone-input.css';
 
 interface Props {
     profissional: {
@@ -124,13 +126,17 @@ export default function EditBasicProfissionalModal({ profissional }: Props) {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-semibold text-gray-700 mb-1.5">Telefone</label>
-                                    <input
-                                        type="tel"
+                                    <PhoneInput
+                                        international
+                                        defaultCountry="BR"
+                                        limitMaxLength
                                         value={telefone}
-                                        onChange={(e) => setTelefone(e.target.value)}
-                                        placeholder="(11) 99999-9999"
-                                        className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-gray-700"
+                                        onChange={(value) => setTelefone(value || '')}
+                                        className={`w-full px-4 py-2.5 bg-white border ${telefone && !isValidPhoneNumber(telefone) ? 'border-red-500 focus-within:ring-red-500/20 focus-within:border-red-500' : 'border-gray-200 focus-within:ring-blue-500 focus-within:border-blue-500'} rounded-xl focus-within:ring-2 outline-none transition-all text-gray-700`}
                                     />
+                                    {telefone && !isValidPhoneNumber(telefone) && (
+                                        <p className="text-xs text-red-500 mt-1 font-medium">Este número de telefone é inválido.</p>
+                                    )}
                                 </div>
                                 <div>
                                     <label className="block text-sm font-semibold text-gray-700 mb-1.5">E-mail</label>
@@ -155,7 +161,7 @@ export default function EditBasicProfissionalModal({ profissional }: Props) {
                             </button>
                             <button
                                 onClick={handleUpdate}
-                                disabled={isPending}
+                                disabled={isPending || (!!telefone && !isValidPhoneNumber(telefone))}
                                 className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-xl flex items-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
                             >
                                 {isPending ? (
