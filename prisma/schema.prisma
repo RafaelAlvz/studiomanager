@@ -1,0 +1,118 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Profissional {
+  id             String         @id @default(uuid())
+  nome           String
+  telefone       String?
+  email          String?
+  especialidade  String?
+  diasTrabalho   String         // Ex: "1,2,3,4,5"
+  inicioExpediente String       // Ex: "08:00"
+  fimExpediente  String         // Ex: "18:00"
+  criado_em      DateTime       @default(now())
+  atualizado_em  DateTime       @updatedAt
+
+  agendamentos   Agendamento[]
+
+  @@map("profissionais")
+}
+
+model Servico {
+  id                     String         @id @default(uuid())
+  nome_servico           String
+  duracao                Int            // Duração do serviço em minutos
+  tempoPreparacao        Int            @default(0) // Tempo de preparação/limpeza
+  preco                  Float          // No SQLite, os valores decimais são mais compatíveis como Float nativo
+  exige_pagamento_previo Boolean        @default(false)
+  ativo                  Boolean        @default(true)
+  criado_em              DateTime       @default(now())
+
+  agendamentos           Agendamento[]
+
+  @@map("servicos")
+}
+
+model Cliente {
+  id                String         @id @default(uuid())
+  nome              String
+  telefone_whatsapp String         @unique
+  total_faltas      Int            @default(0)
+  criado_em         DateTime       @default(now())
+  
+  agendamentos      Agendamento[]  
+  @@map("clientes")
+}
+
+// O SQLite não suporta nativamente 'enums', então para segurança mantemos como String usando validação na aplicação, 
+// ou mapeamos lógicamente. Usaremos String com valores literais padronizados.
+
+model Agendamento {
+  id                 String             @id @default(uuid())
+  cliente_id         String
+  profissional_id    String
+  servico_id         String
+  data_hora_inicio   DateTime
+  data_hora_fim      DateTime
+  
+  // Status padronizados ("Pendente", "Confirmado", "Cancelado", "Concluído")
+  status_agendamento String             @default("Pendente")
+  
+  // Ex: ("Pendente", "Sinal_Pago", "Pago_Total")
+  status_pagamento   String             @default("Pendente")
+  
+  valor_total        Float              // O valor calculado do agendamento (ajuda se o preço do serviço sofrer variações ao longo do tempo)
+  
+  criado_em          DateTime           @default(now())
+
+  cliente            Cliente            @relation(fields: [cliente_id], references: [id])
+  profissional       Profissional       @relation(fields: [profissional_id], references: [id])
+  servico            Servico            @relation(fields: [servico_id], references: [id])
+
+  transacoes         Transacao[]
+
+  @@map("agendamentos")
+}
+
+model Transacao {
+  id               String         @id @default(uuid())
+  agendamentoId    String?
+  
+  tipo             String         // "ENTRADA" ou "SAIDA"
+  valor            Float          
+  descricao        String
+  data             DateTime       @default(now())
+  
+  agendamento      Agendamento?   @relation(fields: [agendamentoId], references: [id], onDelete: SetNull)
+
+  @@map("transacoes")
+}
+
+model Usuario {
+  id            String    @id @default(uuid())
+  nome          String
+  email         String    @unique
+  senha         String    // Hasheada (ex: bcrypt)
+  role          String    @default("ADMIN") // "ADMIN", "PROFISSIONAL"
+  criado_em     DateTime  @default(now())
+  atualizado_em DateTime  @updatedAt
+
+  @@map("usuarios")
+}
+
+model Configuracao {
+  id            String    @id @default(uuid())
+  nome_negocio  String    @default("StudioManager")
+  logo_url      String?   // Para uso futuro com bucket S3
+  atualizado_em DateTime  @updatedAt
+
+  @@map("configuracoes")
+}
