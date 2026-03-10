@@ -7,6 +7,8 @@ import AgendaManager from './AgendaManager';
 import NewAppointmentModal from '@/components/dashboard/NewAppointmentModal';
 import { getConfiguracaoAction } from '@/lib/actions/configuracao-actions';
 
+export const dynamic = 'force-dynamic';
+
 export default async function AgendaPage() {
   // Fetch all professionals for the filter
   const profissionais = await prisma.profissional.findMany({

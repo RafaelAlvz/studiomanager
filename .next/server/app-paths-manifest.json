@@ -1,1 +1,5 @@
-{}
+{
+  "/agenda/page": "app/agenda/page.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/clientes/page": "app/clientes/page.js"
+}

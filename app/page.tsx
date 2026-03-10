@@ -20,6 +20,8 @@ import { getConfiguracaoAction } from '@/lib/actions/configuracao-actions';
 import { startOfMonth, endOfMonth, startOfDay, endOfDay, subDays, addDays, format, isSameDay } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminDashboard() {
   const agora = new Date();
   const inicioFiltroAgenda = startOfDay(agora); // Começa hoje cedo (Local do Server)

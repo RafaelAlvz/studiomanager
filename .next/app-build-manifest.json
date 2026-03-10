@@ -1,3 +1,22 @@
 {
-  "pages": {}
+  "pages": {
+    "/clientes/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/clientes/page.css",
+      "static/chunks/app/clientes/page.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
+    ],
+    "/agenda/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/agenda/page.css",
+      "static/chunks/app/agenda/page.js"
+    ]
+  }
 }

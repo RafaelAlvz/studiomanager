@@ -1,5 +1,58 @@
 {
-  "node": {},
+  "node": {
+    "c6b600afad99857ae6bea4b16ded40ddd28df2f0": {
+      "workers": {
+        "app/clientes/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=!",
+        "app/agenda/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=!"
+      },
+      "layer": {
+        "app/clientes/page": "rsc",
+        "app/agenda/page": "rsc"
+      }
+    },
+    "c8ada1298103d047a0d4eaafda1f4ee0f62812b8": {
+      "workers": {
+        "app/clientes/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=!",
+        "app/agenda/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=!"
+      },
+      "layer": {
+        "app/clientes/page": "rsc",
+        "app/agenda/page": "rsc"
+      }
+    },
+    "4fe78befb057bf85e1c495d1b78da20f530b541a": {
+      "workers": {
+        "app/clientes/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Capp%5C%5Cclientes%5C%5Cactions.ts%22%2C%5B%22deleteCliente%22%2C%22updateCliente%22%2C%22createCliente%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/clientes/page": "action-browser"
+      }
+    },
+    "8fc38aa938b217390b8d52de73aa832ee73b2786": {
+      "workers": {
+        "app/clientes/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Capp%5C%5Cclientes%5C%5Cactions.ts%22%2C%5B%22deleteCliente%22%2C%22updateCliente%22%2C%22createCliente%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/clientes/page": "action-browser"
+      }
+    },
+    "ed9197f45708a07ddc495260aff8ecc728cb10ea": {
+      "workers": {
+        "app/clientes/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Capp%5C%5Cclientes%5C%5Cactions.ts%22%2C%5B%22deleteCliente%22%2C%22updateCliente%22%2C%22createCliente%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/clientes/page": "action-browser"
+      }
+    },
+    "59a8c9129663c1389aa4bd6bace56cd0d612222c": {
+      "workers": {
+        "app/agenda/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cappointment-actions.ts%22%2C%5B%22updateAppointmentStatusAction%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/agenda/page": "action-browser"
+      }
+    }
+  },
   "edge": {},
-  "encryptionKey": "zihz3Y9K/P6ZDw0l1HI0FCiGanzZSZEX1W+cIzCeuIg="
+  "encryptionKey": "lQ44GPbWzNph8wgyAXGyTzNGCe2pzFmjWIpAqqyT9gg="
 }
