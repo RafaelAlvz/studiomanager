@@ -5,7 +5,7 @@ import prisma from '@/lib/prisma';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { cliente_id, profissional_id, servico_id, data_hora_inicio, novoCliente } = body;
+    const { cliente_id, profissional_id, servico_id, data_hora_inicio, novoCliente, observacao } = body;
 
     let finalClienteId = cliente_id;
 
@@ -33,7 +33,8 @@ export async function POST(request: Request) {
       cliente_id: finalClienteId,
       profissional_id,
       servico_id,
-      data_hora_inicio: new Date(data_hora_inicio)
+      data_hora_inicio: new Date(data_hora_inicio),
+      observacao
     });
 
     return NextResponse.json(agendamento, { status: 201 });

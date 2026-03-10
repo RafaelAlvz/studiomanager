@@ -8,9 +8,10 @@ import toast from 'react-hot-toast';
 interface AppointmentActionsProps {
     agendamentoId: string;
     statusAgendamento: string;
+    variant?: 'default' | 'compact';
 }
 
-export default function AppointmentActions({ agendamentoId, statusAgendamento }: AppointmentActionsProps) {
+export default function AppointmentActions({ agendamentoId, statusAgendamento, variant = 'default' }: AppointmentActionsProps) {
     const [loadingAction, setLoadingAction] = useState<string | null>(null);
 
     if (statusAgendamento === 'Concluído' || statusAgendamento === 'Cancelado') {
@@ -33,22 +34,26 @@ export default function AppointmentActions({ agendamentoId, statusAgendamento }:
         }
     };
 
+    const isCompact = variant === 'compact';
+
     return (
-        <div className="flex items-center gap-2 mt-3 md:mt-0 w-full md:w-auto">
+        <div className={isCompact ? "flex flex-col gap-1.5 w-full mt-2" : "flex items-center gap-2 mt-3 md:mt-0 w-full md:w-auto"}>
             <button
                 onClick={() => handleUpdate('Concluído')}
                 disabled={loadingAction !== null}
-                className="flex-1 md:flex-none flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-colors shadow-sm bg-emerald-600 hover:bg-emerald-700 text-white disabled:opacity-50 min-w-[190px]"
+                className={`flex items-center justify-center transition-colors shadow-sm disabled:opacity-50 bg-emerald-600 hover:bg-emerald-700 text-white font-medium ${isCompact ? 'w-full px-2 py-1.5 text-xs rounded-lg gap-1.5' : 'flex-1 md:flex-none px-4 py-2 rounded-xl text-sm gap-1.5 min-w-[190px]'
+                    }`}
             >
-                {loadingAction === 'Concluído' ? <><Loader2 size={16} className="animate-spin" /> Processando...</> : <><CheckCircle2 size={16} /> Confirmar Pagamento</>}
+                {loadingAction === 'Concluído' ? <><Loader2 size={14} className="animate-spin" /> {isCompact ? '...' : 'Processando...'}</> : <><CheckCircle2 size={14} /> {isCompact ? 'Concluir' : 'Confirmar Pagamento'}</>}
             </button>
 
             <button
                 onClick={() => handleUpdate('Cancelado')}
                 disabled={loadingAction !== null}
-                className="flex-1 md:flex-none flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-colors shadow-sm border border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 disabled:opacity-50 min-w-[120px]"
+                className={`flex items-center justify-center transition-colors shadow-sm disabled:opacity-50 border border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 font-medium ${isCompact ? 'w-full px-2 py-1.5 text-xs rounded-lg gap-1.5' : 'flex-1 md:flex-none px-4 py-2 rounded-xl text-sm gap-1.5 min-w-[120px]'
+                    }`}
             >
-                {loadingAction === 'Cancelado' ? <><Loader2 size={16} className="animate-spin" /> Carregando</> : <><XCircle size={16} /> Cancelar</>}
+                {loadingAction === 'Cancelado' ? <><Loader2 size={14} className="animate-spin" /> {isCompact ? '...' : 'Carregando'}</> : <><XCircle size={14} /> Cancelar</>}
             </button>
         </div>
     );

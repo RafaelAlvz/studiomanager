@@ -66,6 +66,9 @@ model Agendamento {
   // Status padronizados ("Pendente", "Confirmado", "Cancelado", "Concluído")
   status_agendamento String             @default("Pendente")
   
+  // Notas e detalhes adicionais sobre o agendamento
+  observacao         String?            @db.Text
+  
   // Ex: ("Pendente", "Sinal_Pago", "Pago_Total")
   status_pagamento   String             @default("Pendente")
   

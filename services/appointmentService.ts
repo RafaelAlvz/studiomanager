@@ -1,11 +1,13 @@
 import prisma from '@/lib/prisma';
 import { parse } from 'date-fns';
+import { toZonedTime } from 'date-fns-tz';
 
 interface CreateAppointmentDto {
   cliente_id: string;
   profissional_id: string;
   servico_id: string;
   data_hora_inicio: Date;
+  observacao?: string | null;
 }
 
 export async function createAppointment(data: CreateAppointmentDto) {
@@ -40,16 +42,29 @@ export async function createAppointment(data: CreateAppointmentDto) {
   const data_hora_fim = new Date(data.data_hora_inicio);
   data_hora_fim.setMinutes(data_hora_fim.getMinutes() + servico.duracao + tempoExtra);
 
-  // Verificar se os horários estão dentro do expediente
-  const dataInicioExpediente = new Date(data.data_hora_inicio);
+  // Converter a hora de chegada (UTC no servidor) para o Horário de Brasília
+  const timeZone = 'America/Sao_Paulo';
+  const dataInicioZoned = toZonedTime(data.data_hora_inicio, timeZone);
+  const dataFimZoned = toZonedTime(data_hora_fim, timeZone);
+
+  // Obter a hora e minuto equivalentes exatamente no relógio BRT daquele instante
+  const startHourBRT = dataInicioZoned.getHours();
+  const startMinuteBRT = dataInicioZoned.getMinutes();
+
+  const endHourBRT = dataFimZoned.getHours();
+  const endMinuteBRT = dataFimZoned.getMinutes();
+
+  // Converter os horários de expediente (texto puro do banco) também para um número comprável linear
   const [horaInicioStr, minInicioStr] = profissional.inicioExpediente.split(':');
-  dataInicioExpediente.setHours(Number(horaInicioStr), Number(minInicioStr), 0, 0);
+  const startLimitNum = Number(horaInicioStr) * 100 + Number(minInicioStr);
 
-  const dataFimExpediente = new Date(data.data_hora_inicio);
   const [horaFimStr, minFimStr] = profissional.fimExpediente.split(':');
-  dataFimExpediente.setHours(Number(horaFimStr), Number(minFimStr), 0, 0);
+  const endLimitNum = Number(horaFimStr) * 100 + Number(minFimStr);
 
-  if (data.data_hora_inicio < dataInicioExpediente || data_hora_fim > dataFimExpediente) {
+  const startBRTNum = startHourBRT * 100 + startMinuteBRT;
+  const endBRTNum = endHourBRT * 100 + endMinuteBRT;
+
+  if (startBRTNum < startLimitNum || endBRTNum > endLimitNum) {
     throw new Error("O horário selecionado está fora do expediente do profissional.");
   }
 
@@ -97,7 +112,8 @@ export async function createAppointment(data: CreateAppointmentDto) {
       data_hora_fim: data_hora_fim,
       valor_total: servico.preco,
       status_agendamento: "Pendente",
-      status_pagamento: servico.exige_pagamento_previo ? "Pendente" : "Pendente"
+      status_pagamento: servico.exige_pagamento_previo ? "Pendente" : "Pendente",
+      observacao: data.observacao
     },
     include: {
       cliente: true,

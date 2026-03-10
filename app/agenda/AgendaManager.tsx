@@ -14,9 +14,11 @@ interface Profissional {
 
 interface Agendamento {
   id: string;
+  profissional_id: string;
   data_hora_inicio: Date;
   data_hora_fim: Date;
   status_agendamento: string;
+  observacao?: string | null;
   cliente: { nome: string; telefone_whatsapp: string };
   servico: { nome_servico: string; duracao: number };
 }
@@ -33,6 +35,7 @@ export default function AgendaManager({ profissionais, initialAgendamentos }: Ag
   );
 
   const [viewMode, setViewMode] = useState<'daily' | 'weekly'>('daily');
+  const [selectedAppointment, setSelectedAppointment] = useState<Agendamento | null>(null);
 
   // Date Picker States
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
@@ -248,21 +251,32 @@ export default function AgendaManager({ profissionais, initialAgendamentos }: Ag
                           dayAgendamentos.map(agen => {
                             const isPast = new Date(agen.data_hora_fim) < new Date();
                             const isConcluido = agen.status_agendamento === 'Concluído';
+
+                            const bgSolidClass =
+                              agen.status_agendamento === 'Concluído' ? 'bg-emerald-100 hover:bg-emerald-200 border-emerald-200' :
+                                agen.status_agendamento === 'Confirmado' ? 'bg-blue-100 hover:bg-blue-200 border-blue-200' :
+                                  agen.status_agendamento === 'Cancelado' ? 'bg-red-100 hover:bg-red-200 border-red-200' :
+                                    'bg-amber-100 hover:bg-amber-200 border-amber-200';
+
+                            const dotClass =
+                              agen.status_agendamento === 'Concluído' ? 'bg-emerald-500' :
+                                agen.status_agendamento === 'Confirmado' ? 'bg-blue-500' :
+                                  agen.status_agendamento === 'Cancelado' ? 'bg-red-500' :
+                                    'bg-amber-500';
+
                             return (
-                              <div key={agen.id} className={`p-2.5 md:p-3 rounded-xl border bg-white shadow-sm flex flex-col gap-1.5 md:gap-2.5 relative transition-all hover:border-emerald-300 hover:shadow-md cursor-pointer ${isPast || isConcluido ? 'opacity-70' : 'border-slate-200'}`}>
-                                <div className="flex justify-between items-start gap-1">
-                                  <span className="text-[10px] md:text-xs font-bold text-slate-700 bg-slate-100 px-1.5 md:px-2 py-0.5 rounded-md flex items-center gap-1 shrink-0">
-                                    <Clock size={12} className={isPast ? "text-slate-400" : "text-emerald-500"} />
+                              <div
+                                key={agen.id}
+                                onClick={() => setSelectedAppointment(agen)}
+                                className={`p-2 rounded-lg border shadow-sm flex flex-col gap-1 relative transition-all cursor-pointer overflow-hidden ${isPast || isConcluido ? 'opacity-70' : ''} ${bgSolidClass}`}
+                              >
+                                <div className="flex items-center gap-1.5 opacity-80">
+                                  <div className={`w-1.5 h-1.5 rounded-full ${dotClass} shrink-0`} />
+                                  <span className="text-[10px] md:text-xs font-bold text-slate-700">
                                     {format(new Date(agen.data_hora_inicio), 'HH:mm')}
                                   </span>
-                                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full border ${getStatusColor(agen.status_agendamento)}`}>
-                                    {agen.status_agendamento}
-                                  </span>
                                 </div>
-                                <div>
-                                  <h4 className="text-sm md:text-[15px] font-bold text-slate-800 line-clamp-1 truncate" title={agen.cliente.nome}>{agen.cliente.nome}</h4>
-                                  <p className="text-[11px] md:text-xs font-medium text-slate-500 truncate mt-0.5 md:mt-1" title={agen.servico.nome_servico}>{agen.servico.nome_servico}</p>
-                                </div>
+                                <h4 className="text-[11px] md:text-xs font-bold text-slate-800 line-clamp-1 truncate leading-tight" title={agen.cliente.nome}>{agen.cliente.nome}</h4>
                               </div>
                             );
                           })
@@ -337,6 +351,92 @@ export default function AgendaManager({ profissionais, initialAgendamentos }: Ag
           )}
         </div>
       </div>
-    </div>
+
+      {/* Details Modal (Pop-up Padrão Ouro) */}
+      {selectedAppointment && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white rounded-3xl shadow-xl w-full max-w-lg overflow-hidden animate-in zoom-in-95 duration-200 flex flex-col max-h-[90vh]">
+            <div className="flex justify-between items-center p-6 border-b border-slate-100 bg-slate-50/50 shrink-0">
+              <h3 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+                <CalendarIcon className="text-emerald-600" size={24} />
+                Detalhes do Agendamento
+              </h3>
+              <button onClick={() => setSelectedAppointment(null)} className="text-slate-400 hover:text-slate-600 transition-colors p-2 rounded-full hover:bg-slate-100">
+                <XCircle size={24} />
+              </button>
+            </div>
+
+            <div className="p-6 md:p-8 space-y-6 overflow-y-auto">
+              {/* Client Info */}
+              <div>
+                <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2">Cliente</p>
+                <div className="flex items-center gap-4 bg-white border border-slate-100 p-4 rounded-2xl shadow-sm">
+                  <div className="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center font-bold text-xl shrink-0">
+                    {selectedAppointment.cliente.nome.charAt(0).toUpperCase()}
+                  </div>
+                  <div>
+                    <p className="text-xl font-bold text-slate-800 leading-tight">{selectedAppointment.cliente.nome}</p>
+                    <p className="text-sm font-medium text-slate-500 mt-1">{selectedAppointment.cliente.telefone_whatsapp}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Booking Info Grid */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5 flex items-center gap-1.5">
+                    <Clock size={14} /> Data e Hora
+                  </p>
+                  <p className="text-base font-bold text-slate-800">
+                    {format(new Date(selectedAppointment.data_hora_inicio), "dd/MM/yyyy")}
+                  </p>
+                  <p className="text-sm font-medium text-slate-600 mt-0.5">
+                    {format(new Date(selectedAppointment.data_hora_inicio), 'HH:mm')} às {format(new Date(selectedAppointment.data_hora_fim), 'HH:mm')}
+                  </p>
+                </div>
+
+                <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5 flex items-center gap-1.5">
+                    <CheckCircle2 size={14} /> Serviço
+                  </p>
+                  <p className="text-base font-bold text-slate-800 line-clamp-1" title={selectedAppointment.servico.nome_servico}>
+                    {selectedAppointment.servico.nome_servico}
+                  </p>
+                  <p className="text-sm font-medium text-slate-600 mt-0.5">
+                    {selectedAppointment.servico.duracao} min
+                  </p>
+                </div>
+              </div>
+
+              {/* Observações Elegantes */}
+              {selectedAppointment.observacao && (
+                <div className="bg-amber-50/50 border border-amber-200/60 p-5 rounded-2xl relative overflow-hidden shadow-sm">
+                  <div className="absolute top-0 left-0 w-1.5 h-full bg-amber-400"></div>
+                  <p className="text-xs font-bold text-amber-700 uppercase tracking-widest flex items-center gap-2 mb-2">
+                    Observações
+                  </p>
+                  <p className="text-sm text-amber-900 leading-relaxed font-medium whitespace-pre-wrap">
+                    {selectedAppointment.observacao}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            <div className="p-6 border-t border-slate-100 bg-slate-50 flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0">
+              <span className={`inline-flex px-4 py-1.5 rounded-full text-sm font-bold border ${getStatusColor(selectedAppointment.status_agendamento)} shadow-sm`}>
+                {selectedAppointment.status_agendamento}
+              </span>
+              <div className="w-full sm:w-auto flex justify-end">
+                <AppointmentActions
+                  agendamentoId={selectedAppointment.id}
+                  statusAgendamento={selectedAppointment.status_agendamento}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+    </div >
   );
 }

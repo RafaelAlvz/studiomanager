@@ -29,6 +29,7 @@ export default function NewAppointmentModal({ clientes, profissionais, servicos 
   const [servicoId, setServicoId] = useState("");
   const [data, setData] = useState("");
   const [hora, setHora] = useState("");
+  const [observacao, setObservacao] = useState("");
 
   // Combobox & New Client State
   const [searchCliente, setSearchCliente] = useState("");
@@ -78,7 +79,8 @@ export default function NewAppointmentModal({ clientes, profissionais, servicos 
       const payload: any = {
         profissional_id: profissionalId,
         servico_id: servicoId,
-        data_hora_inicio: dateTimeString
+        data_hora_inicio: dateTimeString,
+        observacao: observacao.trim() !== '' ? observacao : null
       };
 
       if (isCreatingClient) {
@@ -120,6 +122,7 @@ export default function NewAppointmentModal({ clientes, profissionais, servicos 
     setServicoId("");
     setData("");
     setHora("");
+    setObservacao("");
     setSearchCliente("");
     setIsCreatingClient(false);
     setNewClientPhone("");
@@ -337,6 +340,20 @@ export default function NewAppointmentModal({ clientes, profissionais, servicos 
                     />
                   </div>
                 </div>
+              </div>
+
+              {/* Observações Opcionais */}
+              <div className="mt-5">
+                <label className="block text-sm font-semibold text-slate-700 mb-1.5 flex justify-between">
+                  Observações / Detalhes <span className="text-slate-400 font-normal text-xs">Opcional</span>
+                </label>
+                <textarea
+                  rows={3}
+                  placeholder="Ex: Cliente pediu alergia a produtos X, preferência por corte Y..."
+                  value={observacao}
+                  onChange={(e) => setObservacao(e.target.value)}
+                  className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all resize-none shadow-sm"
+                />
               </div>
 
               <div className="mt-8 pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
