@@ -1,44 +1,5 @@
 {
-  "node": {
-    "c6b600afad99857ae6bea4b16ded40ddd28df2f0": {
-      "workers": {
-        "app/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=!",
-        "app/agenda/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=!"
-      },
-      "layer": {
-        "app/page": "rsc",
-        "app/agenda/page": "rsc"
-      }
-    },
-    "c8ada1298103d047a0d4eaafda1f4ee0f62812b8": {
-      "workers": {
-        "app/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=!",
-        "app/agenda/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=!"
-      },
-      "layer": {
-        "app/page": "rsc",
-        "app/agenda/page": "rsc"
-      }
-    },
-    "c558953018072ccdd95cf5313abe62e328ea29c6": {
-      "workers": {
-        "app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Capp%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createExpense%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cappointment-actions.ts%22%2C%5B%22updateAppointmentStatusAction%22%5D%5D%5D&__client_imported__=true!"
-      },
-      "layer": {
-        "app/page": "action-browser"
-      }
-    },
-    "59a8c9129663c1389aa4bd6bace56cd0d612222c": {
-      "workers": {
-        "app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Capp%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createExpense%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cappointment-actions.ts%22%2C%5B%22updateAppointmentStatusAction%22%5D%5D%5D&__client_imported__=true!",
-        "app/agenda/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cappointment-actions.ts%22%2C%5B%22updateAppointmentStatusAction%22%5D%5D%5D&__client_imported__=true!"
-      },
-      "layer": {
-        "app/page": "action-browser",
-        "app/agenda/page": "action-browser"
-      }
-    }
-  },
+  "node": {},
   "edge": {},
-  "encryptionKey": "gLZs8mICSV7Q/VYUQJK3Qz4U5k/y13+ke4+e9L9K2lY="
+  "encryptionKey": "zihz3Y9K/P6ZDw0l1HI0FCiGanzZSZEX1W+cIzCeuIg="
 }
