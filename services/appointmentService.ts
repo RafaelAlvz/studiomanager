@@ -10,10 +10,10 @@ interface CreateAppointmentDto {
 
 export async function createAppointment(data: CreateAppointmentDto) {
   // 1. Fetch service to understand duration and price
-  const servico = await prisma.servico.findUnique({ 
-    where: { id: data.servico_id } 
+  const servico = await prisma.servico.findUnique({
+    where: { id: data.servico_id }
   });
-  
+
   if (!servico) {
     throw new Error("Serviço não encontrado.");
   }
@@ -51,6 +51,11 @@ export async function createAppointment(data: CreateAppointmentDto) {
 
   if (data.data_hora_inicio < dataInicioExpediente || data_hora_fim > dataFimExpediente) {
     throw new Error("O horário selecionado está fora do expediente do profissional.");
+  }
+
+  // Verificar horário no passado
+  if (data.data_hora_inicio < new Date()) {
+    throw new Error("Não é possível realizar agendamentos em horários que já passaram.");
   }
 
   // 2. Validate availability (Check for conflicts)

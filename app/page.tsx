@@ -17,13 +17,13 @@ import {
 import Sidebar from '@/components/dashboard/Sidebar';
 import DashboardChart from '@/components/dashboard/DashboardChart';
 import { getConfiguracaoAction } from '@/lib/actions/configuracao-actions';
-import { startOfMonth, endOfMonth, startOfDay, endOfDay, subDays, format, isSameDay, startOfWeek, endOfWeek } from 'date-fns';
+import { startOfMonth, endOfMonth, startOfDay, endOfDay, subDays, addDays, format, isSameDay } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
 export default async function AdminDashboard() {
   const agora = new Date();
-  const inicioSemana = startOfWeek(agora, { weekStartsOn: 0 }); // Domingo
-  const fimSemana = endOfWeek(agora, { weekStartsOn: 0 }); // Sabado
+  const inicioFiltroAgenda = startOfDay(agora); // Começa hoje cedo (Local do Server)
+  const fimFiltroAgenda = endOfDay(addDays(agora, 7)); // Vai até o fim do 7º dia
   const inicioMes = startOfMonth(agora);
   const fimMes = endOfMonth(agora);
 
@@ -45,8 +45,8 @@ export default async function AdminDashboard() {
     prisma.agendamento.findMany({
       where: {
         data_hora_inicio: {
-          gte: inicioSemana,
-          lte: fimSemana
+          gte: inicioFiltroAgenda,
+          lte: fimFiltroAgenda
         }
       },
       include: {

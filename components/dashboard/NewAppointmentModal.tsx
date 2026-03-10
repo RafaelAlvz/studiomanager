@@ -69,9 +69,11 @@ export default function NewAppointmentModal({ clientes, profissionais, servicos 
     setError(null);
 
     try {
-      const [year, month, day] = data.split('-');
-      const [hours, minutes] = hora.split('-');
-      const dateTimeString = `${data}T${hora}:00`;
+      const [year, month, day] = data.split('-').map(Number);
+      const [hours, minutes] = hora.split(':').map(Number);
+      // Criar a data no fuso local do navegador para evitar que o Node/Servidor leia como UTC cru
+      const dataHoraLocal = new Date(year, month - 1, day, hours, minutes, 0);
+      const dateTimeString = dataHoraLocal.toISOString();
 
       const payload: any = {
         profissional_id: profissionalId,

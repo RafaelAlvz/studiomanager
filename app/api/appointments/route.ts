@@ -39,12 +39,15 @@ export async function POST(request: Request) {
     return NextResponse.json(agendamento, { status: 201 });
 
   } catch (error: any) {
+    console.error("Erro interno ao criar agendamento:", error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+
     // If it's a known conflict error from our service, return 409 Conflict
-    if (error.message.includes("já possui um agendamento")) {
-      return NextResponse.json({ error: error.message }, { status: 409 });
+    if (errorMessage.includes("já possui um agendamento")) {
+      return NextResponse.json({ error: errorMessage }, { status: 409 });
     }
 
     // Otherwise 400 Bad Request
-    return NextResponse.json({ error: error.message }, { status: 400 });
+    return NextResponse.json({ error: errorMessage || "Erro desconhecido ao agendar." }, { status: 400 });
   }
 }
