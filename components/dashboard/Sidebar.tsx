@@ -21,6 +21,7 @@ export default function Sidebar() {
     const pathname = usePathname();
     const { data: session } = useSession();
     const [nomeNegocio, setNomeNegocio] = React.useState('StudioManager');
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
     React.useEffect(() => {
         getConfiguracaoAction().then(res => setNomeNegocio(res.nome_negocio));
@@ -45,21 +46,34 @@ export default function Sidebar() {
                     </div>
                     <h1 className="font-semibold text-lg text-slate-800">{nomeNegocio}</h1>
                 </div>
-                <button className="p-2 bg-slate-100 rounded-md text-slate-600">
+                <button
+                    className="p-2 bg-slate-100 rounded-md text-slate-600"
+                    onClick={() => setIsMobileMenuOpen(true)}
+                >
                     <Menu size={24} />
                 </button>
             </div>
 
-            {/* Sidebar Desktop */}
-            <aside className="hidden md:flex w-64 flex-col bg-white border-r border-slate-200 shadow-sm fixed h-full z-10 top-0 left-0">
-                <div className="p-6 flex items-center gap-3">
-                    <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center shadow-md shadow-emerald-200">
-                        <span className="text-white font-bold text-xl">{nomeNegocio.charAt(0).toUpperCase()}</span>
+            {/* Overlay for mobile */}
+            {isMobileMenuOpen && (
+                <div
+                    className="md:hidden fixed inset-0 bg-slate-900/50 z-30 transition-opacity"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                />
+            )}
+
+            {/* Sidebar Desktop & Mobile */}
+            <aside className={`fixed flex w-64 flex-col bg-white border-r border-slate-200 shadow-sm h-full z-40 top-0 left-0 transition-transform duration-300 md:translate-x-0 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+                <div className="p-6 flex items-center justify-between md:justify-start gap-3">
+                    <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center shadow-md shadow-emerald-200">
+                            <span className="text-white font-bold text-xl">{nomeNegocio.charAt(0).toUpperCase()}</span>
+                        </div>
+                        <h1 className="font-bold text-xl tracking-tight text-slate-800 truncate">{nomeNegocio}</h1>
                     </div>
-                    <h1 className="font-bold text-xl tracking-tight text-slate-800 truncate">{nomeNegocio}</h1>
                 </div>
 
-                <nav className="flex-1 px-4 py-4 space-y-1 overflow-y-auto">
+                <nav className="flex-1 px-4 py-4 space-y-1 overflow-y-auto" onClick={() => setIsMobileMenuOpen(false)}>
                     <Link href="/" className={getLinkClass('/')}>
                         <LayoutDashboard size={20} />
                         Dashboard

@@ -2,58 +2,82 @@
   "node": {
     "59a8c9129663c1389aa4bd6bace56cd0d612222c": {
       "workers": {
-        "app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cappointment-actions.ts%22%2C%5B%22updateAppointmentStatusAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Capp%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createExpense%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!",
-        "app/agenda/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cappointment-actions.ts%22%2C%5B%22updateAppointmentStatusAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!"
+        "app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cappointment-actions.ts%22%2C%5B%22updateAppointmentStatusAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Capp%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createExpense%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
-        "app/page": "action-browser",
-        "app/agenda/page": "action-browser"
+        "app/page": "action-browser"
       }
     },
     "c558953018072ccdd95cf5313abe62e328ea29c6": {
       "workers": {
-        "app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cappointment-actions.ts%22%2C%5B%22updateAppointmentStatusAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Capp%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createExpense%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!",
-        "app/financeiro/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Capp%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createExpense%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!"
+        "app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cappointment-actions.ts%22%2C%5B%22updateAppointmentStatusAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Capp%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createExpense%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
-        "app/page": "action-browser",
-        "app/financeiro/page": "action-browser"
+        "app/page": "action-browser"
       }
     },
     "c6b600afad99857ae6bea4b16ded40ddd28df2f0": {
       "workers": {
         "app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cappointment-actions.ts%22%2C%5B%22updateAppointmentStatusAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Capp%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createExpense%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!",
-        "app/agenda/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cappointment-actions.ts%22%2C%5B%22updateAppointmentStatusAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!",
+        "app/profissionais/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cprofissional-actions.ts%22%2C%5B%22deleteProfissionalAction%22%2C%22updateProfissionalBaseAction%22%2C%22createProfissionalAction%22%2C%22updateProfissionalAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!",
         "app/servicos/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Capp%5C%5Cservicos%5C%5Cactions.ts%22%2C%5B%22updateServico%22%2C%22createServico%22%2C%22deleteServico%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!",
-        "app/configuracoes/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!",
-        "app/financeiro/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Capp%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createExpense%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!",
-        "app/clientes/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Capp%5C%5Cclientes%5C%5Cactions.ts%22%2C%5B%22deleteCliente%22%2C%22updateCliente%22%2C%22createCliente%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!"
+        "app/clientes/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Capp%5C%5Cclientes%5C%5Cactions.ts%22%2C%5B%22deleteCliente%22%2C%22updateCliente%22%2C%22createCliente%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!",
+        "app/configuracoes/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
         "app/page": "action-browser",
-        "app/agenda/page": "action-browser",
+        "app/profissionais/page": "action-browser",
         "app/servicos/page": "action-browser",
-        "app/configuracoes/page": "action-browser",
-        "app/financeiro/page": "action-browser",
-        "app/clientes/page": "action-browser"
+        "app/clientes/page": "action-browser",
+        "app/configuracoes/page": "action-browser"
       }
     },
     "c8ada1298103d047a0d4eaafda1f4ee0f62812b8": {
       "workers": {
         "app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cappointment-actions.ts%22%2C%5B%22updateAppointmentStatusAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Capp%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createExpense%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!",
-        "app/agenda/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cappointment-actions.ts%22%2C%5B%22updateAppointmentStatusAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!",
+        "app/profissionais/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cprofissional-actions.ts%22%2C%5B%22deleteProfissionalAction%22%2C%22updateProfissionalBaseAction%22%2C%22createProfissionalAction%22%2C%22updateProfissionalAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!",
         "app/servicos/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Capp%5C%5Cservicos%5C%5Cactions.ts%22%2C%5B%22updateServico%22%2C%22createServico%22%2C%22deleteServico%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!",
-        "app/configuracoes/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!",
-        "app/financeiro/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Capp%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createExpense%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!",
-        "app/clientes/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Capp%5C%5Cclientes%5C%5Cactions.ts%22%2C%5B%22deleteCliente%22%2C%22updateCliente%22%2C%22createCliente%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!"
+        "app/clientes/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Capp%5C%5Cclientes%5C%5Cactions.ts%22%2C%5B%22deleteCliente%22%2C%22updateCliente%22%2C%22createCliente%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!",
+        "app/configuracoes/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
         "app/page": "action-browser",
-        "app/agenda/page": "action-browser",
+        "app/profissionais/page": "action-browser",
         "app/servicos/page": "action-browser",
-        "app/configuracoes/page": "action-browser",
-        "app/financeiro/page": "action-browser",
-        "app/clientes/page": "action-browser"
+        "app/clientes/page": "action-browser",
+        "app/configuracoes/page": "action-browser"
+      }
+    },
+    "27367ab56ecda8cfe884926435e14fecd38bc1f4": {
+      "workers": {
+        "app/profissionais/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cprofissional-actions.ts%22%2C%5B%22deleteProfissionalAction%22%2C%22updateProfissionalBaseAction%22%2C%22createProfissionalAction%22%2C%22updateProfissionalAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/profissionais/page": "action-browser"
+      }
+    },
+    "69fb143146ec6ee4f89ed0c38fe85200e3afd5fd": {
+      "workers": {
+        "app/profissionais/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cprofissional-actions.ts%22%2C%5B%22deleteProfissionalAction%22%2C%22updateProfissionalBaseAction%22%2C%22createProfissionalAction%22%2C%22updateProfissionalAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/profissionais/page": "action-browser"
+      }
+    },
+    "900aa5aafed2c585900871a05a26bf1fbee52a2a": {
+      "workers": {
+        "app/profissionais/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cprofissional-actions.ts%22%2C%5B%22deleteProfissionalAction%22%2C%22updateProfissionalBaseAction%22%2C%22createProfissionalAction%22%2C%22updateProfissionalAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/profissionais/page": "action-browser"
+      }
+    },
+    "9fbb8fa60e5f4ece3e6daa451436fb356ecc5396": {
+      "workers": {
+        "app/profissionais/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cprofissional-actions.ts%22%2C%5B%22deleteProfissionalAction%22%2C%22updateProfissionalBaseAction%22%2C%22createProfissionalAction%22%2C%22updateProfissionalAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CRafael%5C%5CDocuments%5C%5CProjetos%5C%5Csaas-agendamento%5C%5Clib%5C%5Cactions%5C%5Cconfiguracao-actions.ts%22%2C%5B%22saveConfiguracaoAction%22%2C%22getConfiguracaoAction%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/profissionais/page": "action-browser"
       }
     },
     "2eee65d956b47354aafc9d05a13f6c3bacdf7296": {
@@ -106,5 +130,5 @@
     }
   },
   "edge": {},
-  "encryptionKey": "X9b+PFyn193W7sJPAo9z1W3RPQd84s1kqFvs5ay7YG4="
+  "encryptionKey": "Y7QbONqBcuJlOAJZGcrpFi1lnvYFrPHTKlZZ3g2TIwQ="
 }
